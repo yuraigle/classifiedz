@@ -28,7 +28,6 @@ public class AuthService {
     private final JwtTokenProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
 
-
     @Transactional
     public void register(RegisterRequest req) {
 
