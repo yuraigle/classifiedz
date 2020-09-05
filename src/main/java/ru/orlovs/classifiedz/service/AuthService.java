@@ -34,7 +34,7 @@ public class AuthService {
 
         boolean exists = userRepository.findByEmail(req.getEmail()).isPresent();
         if (exists) {
-            throw new AuthenticationServiceException("auth.email.duplicate");
+            throw new AuthenticationServiceException("email.duplicate");
         }
 
         User user = new User();
