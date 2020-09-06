@@ -14,7 +14,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Dashboard',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -53,15 +53,41 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://buefy.github.io/#/documentation
+    '@nuxtjs/auth',
     'nuxt-buefy',
     'nuxt-fontawesome',
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
+
+  router: {
+    middleware: ['auth'],
+  },
+
+  axios: {
+    baseURL: 'http://localhost:8081',
+  },
+
+  auth: {
+    localStorage: false,
+    cookie: {
+      options: {
+        expires: 7,
+      },
+    },
+    strategies: {
+      local: {
+        token: { property: 'token' },
+        autoFetchUser: true,
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          user: { url: '/api/auth/me', method: 'get', propertyName: 'user' },
+          logout: false,
+        },
+        redirect: {
+          logout: '/',
+        },
+      },
+    },
+  },
 
   buefy: {
     materialDesignIcons: false,

@@ -9,11 +9,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.orlovs.classifiedz.controller.dto.LoginRequest;
+import ru.orlovs.classifiedz.controller.dto.LoginResponse;
+import ru.orlovs.classifiedz.controller.dto.RegisterRequest;
 import ru.orlovs.classifiedz.domain.User;
 import ru.orlovs.classifiedz.domain.UserRepo;
 import ru.orlovs.classifiedz.security.JwtTokenProvider;
-import ru.orlovs.classifiedz.controller.dto.LoginRequest;
-import ru.orlovs.classifiedz.controller.dto.RegisterRequest;
 
 import javax.annotation.PostConstruct;
 import java.time.ZonedDateTime;
@@ -45,11 +46,12 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String login(LoginRequest req) {
+    public LoginResponse login(LoginRequest req) {
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword())
         );
-        return jwtProvider.createToken(authenticate);
+        String token = jwtProvider.createToken(authenticate);
+        return new LoginResponse(token);
     }
 
     @PostConstruct

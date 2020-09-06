@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <p>hello</p>
+    <p>Home</p>
   </section>
 </template>
 
