@@ -4,21 +4,20 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
 public class RegisterRequest {
 
     @Email(message = "email.malformed")
-    @NotNull(message = "required")
+    @NotBlank(message = "email.required")
     private String email;
 
-    @NotNull(message = "required")
-    @Size(min = 6, max = 20)
+    @NotBlank(message = "password.required")
+    @Size(min = 6, max = 20, message = "password.length")
     private String password;
 
-    @NotBlank(message = "required")
-    @Size(min = 3, max = 255)
+    @NotBlank(message = "name.required")
+    @Size(min = 3, max = 255, message = "name.length")
     private String name;
 }

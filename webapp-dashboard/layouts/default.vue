@@ -29,12 +29,8 @@ export default {
   methods: {
     async handleLogout() {
       await this.$auth.logout()
-      this.$buefy.toast.open({
-        message: 'Bye!',
-        type: 'is-warning',
-        position: 'is-bottom-right',
-      })
       this.$router.push('/login')
+      this.showWarn('Bye!')
     },
   },
 }

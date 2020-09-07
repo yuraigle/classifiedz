@@ -5,14 +5,30 @@
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
             <form class="box" @submit.prevent="handleLogin">
-              <b-field label="Email">
-                <b-input v-model="email" type="email" icon="envelope"></b-input>
+              <b-field
+                label="Email"
+                label-position="on-border"
+                :type="fieldType('email')"
+                :message="fieldMsg('email')"
+              >
+                <b-input
+                  v-model="email"
+                  type="email"
+                  icon="envelope"
+                  @input="$v.$touch()"
+                ></b-input>
               </b-field>
-              <b-field label="Password">
+              <b-field
+                label="Password"
+                label-position="on-border"
+                :type="fieldType('password')"
+                :message="fieldMsg('password')"
+              >
                 <b-input
                   v-model="password"
                   type="password"
                   icon="lock"
+                  @input="$v.$touch()"
                 ></b-input>
               </b-field>
               <b-field>
@@ -29,33 +45,36 @@
 </template>
 
 <script>
+import { required, email, minLength, maxLength } from 'vuelidate/lib/validators'
+
 export default {
   data: () => ({
     email: '',
     password: '',
   }),
 
+  validations: {
+    email: { required, email },
+    password: { required, minLength: minLength(6), maxLength: maxLength(20) },
+  },
+
   methods: {
     handleLogin() {
-      const data = { email: this.email, password: this.password }
-      try {
-        this.$auth
-          .loginWith('local', { data })
-          .then(() => {
-            this.$buefy.toast.open({
-              message: 'Hello!',
-              type: 'is-warning',
-              position: 'is-bottom-right',
-            })
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      } catch (err) {
-        console.log(err)
-        this.$buefy.toast.open({ message: err, type: 'is-danger' })
-        // TODO чет сообщения не ловятся
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        return
       }
+
+      const data = { email: this.email, password: this.password }
+      this.$auth
+        .loginWith('local', { data })
+        .then(() => this.showInfo('Hello!'))
+        .catch((err) => {
+          const { status, data } = err.response
+          if (status === 400 && Array.isArray(data)) {
+            data.forEach(({ message }) => this.showError(message))
+          }
+        })
     },
   },
 }
