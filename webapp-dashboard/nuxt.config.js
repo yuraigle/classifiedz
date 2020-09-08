@@ -24,12 +24,19 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/dashboard/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: '/dashboard/fontawesome/css/fontawesome.min.css',
+      },
+      { rel: 'stylesheet', href: '/dashboard/fontawesome/css/solid.min.css' },
+    ],
   },
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/theme.scss'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -55,11 +62,10 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     'nuxt-buefy',
-    'nuxt-fontawesome',
   ],
 
   router: {
-    base: '/dashboard',
+    base: '/dashboard/',
     trailingSlash: true,
     middleware: ['auth'],
   },
@@ -95,28 +101,21 @@ export default {
   },
 
   buefy: {
+    css: false,
     materialDesignIcons: false,
     defaultIconPack: 'fas',
-    defaultIconComponent: 'font-awesome-icon',
-  },
-
-  fontawesome: {
-    imports: [
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas'],
-      },
-    ],
   },
 
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    // analyze: true,
+    extractCSS: true,
+  },
 
   generate: {
     dir: '../src/main/resources/dashboard-dist',
-    // dir: '../target/dashboard',
   },
 }

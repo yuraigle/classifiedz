@@ -11,12 +11,10 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@nuxtjs/auth": "^4.9.1",
-    "@nuxtjs/axios": "^5.12.0",
-    "nuxt": "^2.14.0",
-    "nuxt-buefy": "^0.3.31",
-    "nuxt-fontawesome": "^0.4.0",
+    "@nuxtjs/axios": "^5.12.2",
+    "nuxt": "^2.14.4",
+    "nuxt-buefy": "^0.4.3",
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {
@@ -28,6 +26,8 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.5",
+    "sass-loader": "^10.0.2"
   }
 }

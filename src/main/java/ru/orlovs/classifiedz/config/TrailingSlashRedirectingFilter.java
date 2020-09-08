@@ -27,9 +27,12 @@ public class TrailingSlashRedirectingFilter extends OncePerRequestFilter {
         String uri = req.getRequestURI();
 
         boolean isStaticFile = false;
-        if (uri.endsWith(".js") || uri.endsWith(".css"))
-            isStaticFile = true;
-        if (uri.endsWith(".html") || uri.endsWith(".ico"))
+        if (uri.endsWith(".js") || uri.endsWith(".css") ||
+                uri.endsWith(".html") || uri.endsWith(".ico") ||
+                uri.endsWith(".woff") || uri.endsWith(".woff2") ||
+                uri.endsWith(".svg") || uri.endsWith(".ttf") ||
+                uri.endsWith(".eot")
+        )
             isStaticFile = true;
 
         if (!isStaticFile && !uri.startsWith("/api") && !uri.endsWith("/")) {
