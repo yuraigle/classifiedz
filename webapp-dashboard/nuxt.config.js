@@ -24,7 +24,7 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }],
   },
   /*
    ** Global CSS
@@ -59,6 +59,8 @@ export default {
   ],
 
   router: {
+    base: '/dashboard',
+    trailingSlash: true,
     middleware: ['auth'],
   },
 
@@ -82,10 +84,13 @@ export default {
           user: { url: '/api/auth/me', method: 'get', propertyName: 'user' },
           logout: false,
         },
-        redirect: {
-          logout: '/',
-        },
       },
+    },
+    redirect: {
+      login: '/login/',
+      logout: '/',
+      callback: '/login/',
+      home: '/',
     },
   },
 
@@ -109,4 +114,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+
+  generate: {
+    dir: '../src/main/resources/dashboard-dist',
+    // dir: '../target/dashboard',
+  },
 }

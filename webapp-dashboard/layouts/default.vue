@@ -29,7 +29,7 @@ export default {
   methods: {
     async handleLogout() {
       await this.$auth.logout()
-      this.$router.push('/login')
+      this.$router.push('/login/')
       this.showWarn('Bye!')
     },
   },
