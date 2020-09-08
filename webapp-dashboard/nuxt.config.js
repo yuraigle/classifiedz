@@ -61,6 +61,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/dayjs',
     'nuxt-buefy',
   ],
 

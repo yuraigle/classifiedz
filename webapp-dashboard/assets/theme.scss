@@ -1,0 +1,23 @@
+@import "~bulma/sass/utilities/initial-variables.sass";
+@import "~bulma/sass/utilities/functions.sass";
+
+// Sandstone
+$primary: #325D88;
+$info: #29ABE0;
+$success: #93C54B;
+$warning: #F47C3C;
+$danger: #d9534f;
+$dark: #3E3F3A;
+$light: #F8F5F0;
+
+$primary-invert: findColorInvert($primary);
+$info-invert: findColorInvert($info);
+$success-invert: findColorInvert($success);
+$warning-invert: findColorInvert($warning);
+$danger-invert: findColorInvert($danger);
+$dark-invert: findColorInvert($dark);
+$light-invert: findColorInvert($light);
+
+// @import "~bulma/sass/utilities/_all.sass";
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
