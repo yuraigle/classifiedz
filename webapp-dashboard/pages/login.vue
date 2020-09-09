@@ -48,6 +48,8 @@
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
+  layout: 'empty',
+
   data: () => ({
     email: '',
     password: '',

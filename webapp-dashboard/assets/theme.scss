@@ -21,3 +21,8 @@ $light-invert: findColorInvert($light);
 // @import "~bulma/sass/utilities/_all.sass";
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+html {
+  background-color: $light;
+}
+

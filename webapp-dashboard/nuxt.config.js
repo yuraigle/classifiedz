@@ -67,8 +67,9 @@ export default {
 
   router: {
     base: '/dashboard/',
-    trailingSlash: true,
     middleware: ['auth'],
+    trailingSlash: true,
+    linkActiveClass: 'is-active',
   },
 
   axios: {

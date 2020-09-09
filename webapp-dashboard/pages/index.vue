@@ -1,5 +1,5 @@
 <template>
-  <p>Home</p>
+  <h3 class="title is-4">HOME</h3>
 </template>
 
 <script>
