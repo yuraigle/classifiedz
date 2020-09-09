@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -29,7 +30,7 @@ public class I18nTests {
         )
                 .andExpect(status().is(400))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].message", is("Required")));
+                .andExpect(jsonPath("$[0].message", endsWith(" is required")));
     }
 
     @Test
@@ -42,7 +43,7 @@ public class I18nTests {
                 .andExpect(status().is(400))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].message", is("Обязательное поле")));
+                .andExpect(jsonPath("$[0].message", startsWith("Обязательное поле: ")));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class I18nTests {
         )
                 .andExpect(status().is(400))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].message", is("Required")));
+                .andExpect(jsonPath("$[0].message", endsWith(" is required")));
     }
 
     @Test
@@ -65,6 +66,6 @@ public class I18nTests {
         )
                 .andExpect(status().is(400))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].message", is("Required")));
+                .andExpect(jsonPath("$[0].message", endsWith(" is required")));
     }
 }

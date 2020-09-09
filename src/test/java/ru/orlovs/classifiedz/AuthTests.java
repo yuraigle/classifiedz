@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -57,5 +58,11 @@ public class AuthTests {
                 .andExpect(status().is(400))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].message", is("Bad credentials")));
+    }
+
+    @Test
+    void tryAccessWithoutToken() throws Exception {
+        mockMvc.perform(get("/api/users"))
+                .andExpect(status().is(403));
     }
 }
