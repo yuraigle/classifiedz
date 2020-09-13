@@ -16,7 +16,7 @@
 export default {
   fetch() {
     this.$axios.$get(`/api/users`).then((data) => {
-      this.users = data._embedded.users
+      this.users = data.content
     })
   },
 

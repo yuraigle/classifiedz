@@ -15,10 +15,10 @@ import java.util.Date;
 @Service
 public class JwtTokenProvider {
 
-    @Value("${security.jwt.token.secret-key:secret-key}")
+    @Value("${security.jwt.token.secret-key}")
     private String secretKey;
 
-    @Value("${security.jwt.token.expire-length:3600000}")
+    @Value("${security.jwt.token.expire-length}")
     private long validityInMilliseconds;
 
     @PostConstruct
@@ -51,7 +51,7 @@ public class JwtTokenProvider {
         }
     }
 
-    public Authentication getAuthentication(String token) {
+    public Authentication getAuthenticationFromToken(String token) {
         String subj = Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
