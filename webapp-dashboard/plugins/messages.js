@@ -6,11 +6,10 @@ Vue.mixin({
       this.$buefy.notification.open({
         message,
         type,
-        position: 'is-bottom',
-        'auto-close': true,
-        closable: false,
+        position: 'is-bottom-right',
         queue: false,
         duration: 5000,
+        closable: false,
       })
     },
 

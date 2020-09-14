@@ -2,26 +2,35 @@
   <div>
     <h3 class="title is-4">USERS</h3>
 
-    <ul>
-      <li v-for="u in users" :key="u.id">
-        <nuxt-link :to="`/users/${u.id}/`">
-          {{ u.name }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <div>
+      <ul v-if="!loading">
+        <li v-for="u in users" :key="u.id">
+          <nuxt-link :to="`/users/${u.id}/`">
+            {{ u.id }}.
+            {{ u.name }}
+          </nuxt-link>
+        </li>
+      </ul>
+      <div v-else class="has-text-centered has-text-grey-light">
+        <b-icon icon="sync-alt" custom-class="fa-spin" size="is-large"></b-icon>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   fetch() {
-    this.$axios.$get(`/api/users`).then((data) => {
-      this.users = data.content
-    })
+    this.$store.dispatch('users/fetchUsers')
   },
 
-  data: () => ({
-    users: [],
-  }),
+  computed: {
+    ...mapState({
+      users: (state) => state.users.list,
+      loading: (state) => state.users.loading,
+    }),
+  },
 }
 </script>

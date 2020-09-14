@@ -21,12 +21,12 @@ public class UsersController {
 
     private final UserRepo userRepo;
 
-    @GetMapping(path = {"", "/", "/list"}, produces = "application/hal+json")
+    @GetMapping(path = {"", "/", "/list"})
     public Page<User> list(Pageable pageable) {
         return userRepo.findAll(pageable);
     }
 
-    @GetMapping(path = "/{id}", produces = "application/hal+json")
+    @GetMapping(path = "/{id}")
     public Optional<User> read(@PathVariable Long id) {
         return userRepo.findById(id);
     }

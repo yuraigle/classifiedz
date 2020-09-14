@@ -46,7 +46,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
+  computed: {
+    ...mapState({
+      warnings: (state) => state.warnings.list,
+    }),
+  },
+
   methods: {
     async handleLogout() {
       await this.$auth.logout()

@@ -71,12 +71,7 @@ export default {
       this.$auth
         .loginWith('local', { data })
         .then(() => this.showInfo('Hello!'))
-        .catch((err) => {
-          const { status, data } = err.response
-          if (status === 400 && Array.isArray(data)) {
-            data.forEach(({ message }) => this.showError(message))
-          }
-        })
+        .catch((err) => this.$store.dispatch('warnings/handleApiError', err))
     },
   },
 }
